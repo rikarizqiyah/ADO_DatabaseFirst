@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PeminjamanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="MsJenis">
+    <Key>
+      <PropertyRef Name="KdJenis" />
+    </Key>
+    <Property Name="KdJenis" Type="int" Nullable="false" />
+    <Property Name="NamaJenis" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="MsPelanggan">
+    <Key>
+      <PropertyRef Name="KdPelanggan" />
+    </Key>
+    <Property Name="KdPelanggan" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="NmPelanggan" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Alamat" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="Telp" Type="varchar" MaxLength="14" Nullable="false" />
+    <Property Name="Jaminan" Type="money" />
+  </EntityType>
+  <EntityType Name="MsVideo">
+    <Key>
+      <PropertyRef Name="KdVideo" />
+    </Key>
+    <Property Name="KdVideo" Type="char" MaxLength="5" Nullable="false" />
+    <Property Name="NmVideo" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="Produksi" Type="varchar" MaxLength="15" />
+    <Property Name="JenisVideo" Type="int" />
+    <Property Name="Stok" Type="int" Nullable="false" />
+    <Property Name="Bahasa" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TrPinjam">
+    <Key>
+      <PropertyRef Name="KdTransaksi" />
+    </Key>
+    <Property Name="KdTransaksi" Type="char" MaxLength="6" Nullable="false" />
+    <Property Name="TglPinjam" Type="datetime" Nullable="false" />
+    <Property Name="KdPelanggan" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="KdVideo" Type="char" MaxLength="5" Nullable="false" />
+    <Property Name="LamaPinjam" Type="int" />
+    <Property Name="TglKembali" Type="datetime" />
+    <Property Name="Denda" Type="money" />
+  </EntityType>
+  <Association Name="FK_MsVideo_MsJenis">
+    <End Role="MsJenis" Type="Self.MsJenis" Multiplicity="0..1" />
+    <End Role="MsVideo" Type="Self.MsVideo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MsJenis">
+        <PropertyRef Name="KdJenis" />
+      </Principal>
+      <Dependent Role="MsVideo">
+        <PropertyRef Name="JenisVideo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TrPinjam_KdPelanggan">
+    <End Role="MsPelanggan" Type="Self.MsPelanggan" Multiplicity="1" />
+    <End Role="TrPinjam" Type="Self.TrPinjam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MsPelanggan">
+        <PropertyRef Name="KdPelanggan" />
+      </Principal>
+      <Dependent Role="TrPinjam">
+        <PropertyRef Name="KdPelanggan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TrPinjam_KdVideo">
+    <End Role="MsVideo" Type="Self.MsVideo" Multiplicity="1" />
+    <End Role="TrPinjam" Type="Self.TrPinjam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MsVideo">
+        <PropertyRef Name="KdVideo" />
+      </Principal>
+      <Dependent Role="TrPinjam">
+        <PropertyRef Name="KdVideo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PeminjamanModelStoreContainer">
+    <EntitySet Name="MsJenis" EntityType="Self.MsJenis" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MsPelanggan" EntityType="Self.MsPelanggan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MsVideo" EntityType="Self.MsVideo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TrPinjam" EntityType="Self.TrPinjam" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_MsVideo_MsJenis" Association="Self.FK_MsVideo_MsJenis">
+      <End Role="MsJenis" EntitySet="MsJenis" />
+      <End Role="MsVideo" EntitySet="MsVideo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TrPinjam_KdPelanggan" Association="Self.FK_TrPinjam_KdPelanggan">
+      <End Role="MsPelanggan" EntitySet="MsPelanggan" />
+      <End Role="TrPinjam" EntitySet="TrPinjam" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TrPinjam_KdVideo" Association="Self.FK_TrPinjam_KdVideo">
+      <End Role="MsVideo" EntitySet="MsVideo" />
+      <End Role="TrPinjam" EntitySet="TrPinjam" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

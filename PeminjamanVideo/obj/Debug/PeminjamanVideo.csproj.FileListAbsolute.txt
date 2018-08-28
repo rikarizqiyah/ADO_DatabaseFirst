@@ -1,0 +1,10 @@
+A:\Bootcamp MII\Project\PeminjamanVideo\PeminjamanVideo\bin\Debug\PeminjamanVideo.exe.config
+A:\Bootcamp MII\Project\PeminjamanVideo\PeminjamanVideo\bin\Debug\PeminjamanVideo.exe
+A:\Bootcamp MII\Project\PeminjamanVideo\PeminjamanVideo\bin\Debug\PeminjamanVideo.pdb
+A:\Bootcamp MII\Project\PeminjamanVideo\PeminjamanVideo\bin\Debug\EntityFramework.dll
+A:\Bootcamp MII\Project\PeminjamanVideo\PeminjamanVideo\bin\Debug\EntityFramework.SqlServer.dll
+A:\Bootcamp MII\Project\PeminjamanVideo\PeminjamanVideo\bin\Debug\EntityFramework.xml
+A:\Bootcamp MII\Project\PeminjamanVideo\PeminjamanVideo\bin\Debug\EntityFramework.SqlServer.xml
+A:\Bootcamp MII\Project\PeminjamanVideo\PeminjamanVideo\obj\Debug\PeminjamanVideo.exe
+A:\Bootcamp MII\Project\PeminjamanVideo\PeminjamanVideo\obj\Debug\PeminjamanVideo.pdb
+A:\Bootcamp MII\Project\PeminjamanVideo\PeminjamanVideo\obj\Debug\PeminjamanVideo.csprojResolveAssemblyReference.cache

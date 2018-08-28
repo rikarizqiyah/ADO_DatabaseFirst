@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PeminjamanModelStoreContainer" CdmEntityContainer="PeminjamanEntities">
+    <EntitySetMapping Name="MsJenis1">
+      <EntityTypeMapping TypeName="PeminjamanModel.MsJenis">
+        <MappingFragment StoreEntitySet="MsJenis">
+          <ScalarProperty Name="KdJenis" ColumnName="KdJenis" />
+          <ScalarProperty Name="NamaJenis" ColumnName="NamaJenis" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MsPelanggans">
+      <EntityTypeMapping TypeName="PeminjamanModel.MsPelanggan">
+        <MappingFragment StoreEntitySet="MsPelanggan">
+          <ScalarProperty Name="KdPelanggan" ColumnName="KdPelanggan" />
+          <ScalarProperty Name="NmPelanggan" ColumnName="NmPelanggan" />
+          <ScalarProperty Name="Alamat" ColumnName="Alamat" />
+          <ScalarProperty Name="Telp" ColumnName="Telp" />
+          <ScalarProperty Name="Jaminan" ColumnName="Jaminan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MsVideos">
+      <EntityTypeMapping TypeName="PeminjamanModel.MsVideo">
+        <MappingFragment StoreEntitySet="MsVideo">
+          <ScalarProperty Name="KdVideo" ColumnName="KdVideo" />
+          <ScalarProperty Name="NmVideo" ColumnName="NmVideo" />
+          <ScalarProperty Name="Produksi" ColumnName="Produksi" />
+          <ScalarProperty Name="JenisVideo" ColumnName="JenisVideo" />
+          <ScalarProperty Name="Stok" ColumnName="Stok" />
+          <ScalarProperty Name="Bahasa" ColumnName="Bahasa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TrPinjams">
+      <EntityTypeMapping TypeName="PeminjamanModel.TrPinjam">
+        <MappingFragment StoreEntitySet="TrPinjam">
+          <ScalarProperty Name="KdTransaksi" ColumnName="KdTransaksi" />
+          <ScalarProperty Name="TglPinjam" ColumnName="TglPinjam" />
+          <ScalarProperty Name="KdPelanggan" ColumnName="KdPelanggan" />
+          <ScalarProperty Name="KdVideo" ColumnName="KdVideo" />
+          <ScalarProperty Name="LamaPinjam" ColumnName="LamaPinjam" />
+          <ScalarProperty Name="TglKembali" ColumnName="TglKembali" />
+          <ScalarProperty Name="Denda" ColumnName="Denda" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PeminjamanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="MsJenis">
+    <Key>
+      <PropertyRef Name="KdJenis" />
+    </Key>
+    <Property Name="KdJenis" Type="Int32" Nullable="false" />
+    <Property Name="NamaJenis" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="MsVideos" Relationship="Self.FK_MsVideo_MsJenis" FromRole="MsJenis" ToRole="MsVideo" />
+  </EntityType>
+  <EntityType Name="MsPelanggan">
+    <Key>
+      <PropertyRef Name="KdPelanggan" />
+    </Key>
+    <Property Name="KdPelanggan" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="NmPelanggan" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Alamat" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Telp" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Jaminan" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="TrPinjams" Relationship="Self.FK_TrPinjam_KdPelanggan" FromRole="MsPelanggan" ToRole="TrPinjam" />
+  </EntityType>
+  <EntityType Name="MsVideo">
+    <Key>
+      <PropertyRef Name="KdVideo" />
+    </Key>
+    <Property Name="KdVideo" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="NmVideo" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Produksi" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="JenisVideo" Type="Int32" />
+    <Property Name="Stok" Type="Int32" Nullable="false" />
+    <Property Name="Bahasa" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="MsJeni" Relationship="Self.FK_MsVideo_MsJenis" FromRole="MsVideo" ToRole="MsJenis" />
+    <NavigationProperty Name="TrPinjams" Relationship="Self.FK_TrPinjam_KdVideo" FromRole="MsVideo" ToRole="TrPinjam" />
+  </EntityType>
+  <EntityType Name="TrPinjam">
+    <Key>
+      <PropertyRef Name="KdTransaksi" />
+    </Key>
+    <Property Name="KdTransaksi" Type="String" MaxLength="6" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="TglPinjam" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="KdPelanggan" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="KdVideo" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="LamaPinjam" Type="Int32" />
+    <Property Name="TglKembali" Type="DateTime" Precision="3" />
+    <Property Name="Denda" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="MsPelanggan" Relationship="Self.FK_TrPinjam_KdPelanggan" FromRole="TrPinjam" ToRole="MsPelanggan" />
+    <NavigationProperty Name="MsVideo" Relationship="Self.FK_TrPinjam_KdVideo" FromRole="TrPinjam" ToRole="MsVideo" />
+  </EntityType>
+  <Association Name="FK_MsVideo_MsJenis">
+    <End Role="MsJenis" Type="PeminjamanModel.MsJenis" Multiplicity="0..1" />
+    <End Role="MsVideo" Type="Self.MsVideo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MsJenis">
+        <PropertyRef Name="KdJenis" />
+      </Principal>
+      <Dependent Role="MsVideo">
+        <PropertyRef Name="JenisVideo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TrPinjam_KdPelanggan">
+    <End Role="MsPelanggan" Type="Self.MsPelanggan" Multiplicity="1" />
+    <End Role="TrPinjam" Type="Self.TrPinjam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MsPelanggan">
+        <PropertyRef Name="KdPelanggan" />
+      </Principal>
+      <Dependent Role="TrPinjam">
+        <PropertyRef Name="KdPelanggan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TrPinjam_KdVideo">
+    <End Role="MsVideo" Type="Self.MsVideo" Multiplicity="1" />
+    <End Role="TrPinjam" Type="Self.TrPinjam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MsVideo">
+        <PropertyRef Name="KdVideo" />
+      </Principal>
+      <Dependent Role="TrPinjam">
+        <PropertyRef Name="KdVideo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PeminjamanEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="MsJenis1" EntityType="PeminjamanModel.MsJenis" />
+    <EntitySet Name="MsPelanggans" EntityType="Self.MsPelanggan" />
+    <EntitySet Name="MsVideos" EntityType="Self.MsVideo" />
+    <EntitySet Name="TrPinjams" EntityType="Self.TrPinjam" />
+    <AssociationSet Name="FK_MsVideo_MsJenis" Association="Self.FK_MsVideo_MsJenis">
+      <End Role="MsJenis" EntitySet="MsJenis1" />
+      <End Role="MsVideo" EntitySet="MsVideos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TrPinjam_KdPelanggan" Association="Self.FK_TrPinjam_KdPelanggan">
+      <End Role="MsPelanggan" EntitySet="MsPelanggans" />
+      <End Role="TrPinjam" EntitySet="TrPinjams" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TrPinjam_KdVideo" Association="Self.FK_TrPinjam_KdVideo">
+      <End Role="MsVideo" EntitySet="MsVideos" />
+      <End Role="TrPinjam" EntitySet="TrPinjams" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
